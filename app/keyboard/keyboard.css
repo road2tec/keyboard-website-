@@ -1,0 +1,537 @@
+/* ============================================
+   THEME VARIABLES
+   ============================================ */
+
+/* Light Theme */
+.theme-light {
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #ffffff;
+    --bg-key: #ffffff;
+    --bg-key-hover: #f0f4f8;
+    --bg-key-active: #e1e8ed;
+    --text-primary: #1a202c;
+    --text-secondary: #718096;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+}
+
+/* Dark Theme */
+.theme-dark {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-key: #334155;
+    --bg-key-hover: #475569;
+    --bg-key-active: #64748b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-color: #475569;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --accent-color: #60a5fa;
+    --accent-hover: #3b82f6;
+}
+
+/* Gradient Theme */
+.theme-gradient {
+    --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-secondary: rgba(255, 255, 255, 0.15);
+    --bg-key: rgba(255, 255, 255, 0.2);
+    --bg-key-hover: rgba(255, 255, 255, 0.3);
+    --bg-key-active: rgba(255, 255, 255, 0.4);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --accent-color: #fbbf24;
+    --accent-hover: #f59e0b;
+}
+
+/* Neon Theme */
+.theme-neon {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-key: #1a1a1a;
+    --bg-key-hover: #2a2a2a;
+    --bg-key-active: #3a3a3a;
+    --text-primary: #00ff88;
+    --text-secondary: #00ccff;
+    --border-color: #00ff88;
+    --shadow-sm: 0 0 10px rgba(0, 255, 136, 0.3);
+    --shadow-md: 0 0 20px rgba(0, 255, 136, 0.5);
+    --shadow-lg: 0 0 40px rgba(0, 255, 136, 0.7);
+    --accent-color: #ff00ff;
+    --accent-hover: #cc00cc;
+    --neon-glow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.keyboard-app {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+/* Gradient theme special background */
+.theme-gradient .keyboard-app {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.keyboard-header {
+    padding: 1.5rem 2rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.theme-gradient .keyboard-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ai-badge {
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+.theme-neon .ai-badge {
+    text-shadow: var(--neon-glow);
+    box-shadow: var(--shadow-md);
+}
+
+.keyboard-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-key);
+    padding: 0.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.theme-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+}
+
+.theme-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.theme-btn.active {
+    opacity: 1;
+    background: var(--accent-color);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.keyboard-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+/* ============================================
+   TEXT DISPLAY
+   ============================================ */
+
+.text-display {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    min-height: 200px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.theme-gradient .text-display {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-neon .text-display {
+    border-color: var(--text-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.display-content {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    min-height: 150px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.6;
+}
+
+.char-count {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+/* ============================================
+   SUGGESTIONS BAR
+   ============================================ */
+
+.suggestions-bar {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.theme-gradient .suggestions-bar {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.suggestion-chip {
+    background: var(--bg-key);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.suggestion-chip:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-neon .suggestion-chip:hover {
+    text-shadow: var(--neon-glow);
+}
+
+/* ============================================
+   KEYBOARD
+   ============================================ */
+
+.keyboard-container {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.theme-gradient .keyboard-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-neon .keyboard-container {
+    border-color: var(--text-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.key {
+    background: var(--bg-key);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    min-width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.key::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.key:active::before {
+    width: 100%;
+    height: 100%;
+}
+
+.key:hover {
+    background: var(--bg-key-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.key:active {
+    background: var(--bg-key-active);
+    transform: translateY(0) scale(0.95);
+    box-shadow: var(--shadow-sm);
+}
+
+.theme-neon .key {
+    text-shadow: 0 0 5px currentColor;
+}
+
+.theme-neon .key:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.key-special {
+    min-width: 100px;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.key-active {
+    background: var(--accent-color) !important;
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.theme-neon .key-active {
+    text-shadow: var(--neon-glow);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Space key special styling */
+.keyboard-row:last-child .key:nth-child(3) {
+    min-width: 300px;
+}
+
+/* Mode switching buttons */
+.key-mode {
+    background: var(--accent-color);
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.key-mode:hover {
+    background: var(--accent-hover);
+}
+
+.theme-neon .key-mode {
+    text-shadow: var(--neon-glow);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.keyboard-footer {
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.theme-gradient .keyboard-footer {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.suggestion-chip {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.theme-neon .ai-badge {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .keyboard-main {
+        padding: 1rem;
+    }
+
+    .keyboard-header {
+        padding: 1rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .key {
+        min-width: 40px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .key-special {
+        min-width: 70px;
+        font-size: 0.875rem;
+    }
+
+    .keyboard-row:last-child .key:nth-child(3) {
+        min-width: 200px;
+    }
+
+    .text-display {
+        min-height: 150px;
+        padding: 1rem;
+    }
+
+    .display-content {
+        font-size: 1rem;
+        min-height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .key {
+        min-width: 32px;
+        height: 45px;
+        font-size: 0.9rem;
+        gap: 0.25rem;
+    }
+
+    .key-special {
+        min-width: 60px;
+    }
+
+    .keyboard-row:last-child .key:nth-child(3) {
+        min-width: 150px;
+    }
+
+    .keyboard-container {
+        padding: 1rem;
+    }
+}

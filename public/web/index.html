@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Smart Keyboard | Premium Typing Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-container">
+                <div class="ai-badge">AI</div>
+                <h1>Smart Keyboard</h1>
+            </div>
+            <p class="subtitle">Real-time typing suggestions & grammar correction</p>
+        </header>
+
+        <main class="keyboard-view">
+            <div class="status-bar">
+                <div class="lang-indicator">
+                    <span class="dot"></span>
+                    Detected Language: <span id="current-lang">English</span>
+                </div>
+                <div id="auth-status" class="auth-loading">Authenticating...</div>
+            </div>
+
+            <div class="suggestion-wrapper">
+                <div id="suggestion-bar" class="suggestion-bar">
+                    <!-- Suggestions will be injected here -->
+                    <div class="placeholder-chip">Start typing for suggestions...</div>
+                </div>
+            </div>
+
+            <div class="typing-container">
+                <textarea id="typing-area" placeholder="Start typing here..." autofocus></textarea>
+                <div class="action-row">
+                    <button id="force-correct-btn" class="primary-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                        Force Correct
+                    </button>
+                    <div id="quota-info" class="quota-info">Quota: --/--</div>
+                </div>
+            </div>
+
+            <div id="results-section" class="results-section" style="display: none;">
+                <div class="result-item">
+                    <strong>Detected Language:</strong>
+                    <span id="result-lang" class="result-value">--</span>
+                </div>
+                <div class="result-item">
+                    <strong>Corrected Text:</strong>
+                    <div id="result-corrected" class="corrected-text">--</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 AI Smart Keyboard System | Premium Typing Experience</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

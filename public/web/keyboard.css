@@ -1,0 +1,624 @@
+/* ===================================
+   Theme Variables
+   =================================== */
+
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #ffffff;
+    --bg-keyboard: #ffffff;
+    --key-bg: #ffffff;
+    --key-hover: #f7fafc;
+    --key-active: #e2e8f0;
+    --key-special: #0070f3;
+    --key-special-hover: #0060d8;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --accent-color: #0070f3;
+    --accent-glow: rgba(0, 112, 243, 0.3);
+    --suggestion-bg: #edf2f7;
+    --suggestion-hover: #e2e8f0;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-keyboard: #1e293b;
+    --key-bg: #334155;
+    --key-hover: #475569;
+    --key-active: #64748b;
+    --key-special: #3b82f6;
+    --key-special-hover: #2563eb;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+    --accent-color: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.4);
+    --suggestion-bg: #334155;
+    --suggestion-hover: #475569;
+}
+
+/* Gradient Theme */
+[data-theme="gradient"] {
+    --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-secondary: rgba(255, 255, 255, 0.1);
+    --bg-keyboard: rgba(255, 255, 255, 0.15);
+    --key-bg: rgba(255, 255, 255, 0.2);
+    --key-hover: rgba(255, 255, 255, 0.3);
+    --key-active: rgba(255, 255, 255, 0.4);
+    --key-special: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --key-special-hover: linear-gradient(135deg, #fa71cd 0%, #f7365a 100%);
+    --text-primary: #ffffff;
+    --text-secondary: #f0f0f0;
+    --text-muted: #d0d0d0;
+    --border-color: rgba(255, 255, 255, 0.2);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+    --accent-color: #f093fb;
+    --accent-glow: rgba(240, 147, 251, 0.5);
+    --suggestion-bg: rgba(255, 255, 255, 0.15);
+    --suggestion-hover: rgba(255, 255, 255, 0.25);
+}
+
+/* Neon Theme */
+[data-theme="neon"] {
+    --bg-primary: #0a0e27;
+    --bg-secondary: #151a35;
+    --bg-keyboard: #1a1f3a;
+    --key-bg: #1e2347;
+    --key-hover: #252b54;
+    --key-active: #2d3461;
+    --key-special: #00ffff;
+    --key-special-hover: #00e5e5;
+    --text-primary: #00ffff;
+    --text-secondary: #7dd3fc;
+    --text-muted: #38bdf8;
+    --border-color: #00ffff;
+    --shadow-sm: 0 0 5px rgba(0, 255, 255, 0.3);
+    --shadow-md: 0 0 10px rgba(0, 255, 255, 0.4);
+    --shadow-lg: 0 0 20px rgba(0, 255, 255, 0.5);
+    --accent-color: #ff00ff;
+    --accent-glow: rgba(255, 0, 255, 0.6);
+    --suggestion-bg: #1e2347;
+    --suggestion-hover: #252b54;
+}
+
+/* ===================================
+   Base Styles
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="gradient"] body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+/* ===================================
+   Header & Theme Switcher
+   =================================== */
+
+.header {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="gradient"] .header,
+[data-theme="gradient"] .keyboard-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ai-badge {
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+[data-theme="neon"] .ai-badge {
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-primary);
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="gradient"] .theme-switcher {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+    background: var(--key-hover);
+    color: var(--text-primary);
+}
+
+.theme-btn.active {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+[data-theme="neon"] .theme-btn.active {
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* ===================================
+   Keyboard Container
+   =================================== */
+
+.keyboard-container {
+    background: var(--bg-keyboard);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+[data-theme="neon"] .keyboard-container {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+/* ===================================
+   Display Section
+   =================================== */
+
+.display-section {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid var(--border-color);
+    min-height: 120px;
+}
+
+[data-theme="neon"] .display-section {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.text-display {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    min-height: 60px;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.25rem;
+    background: var(--accent-color);
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.display-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.char-count {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.clear-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.clear-btn:hover {
+    background: var(--key-hover);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* ===================================
+   Suggestions Section
+   =================================== */
+
+.suggestions-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--suggestion-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.suggestions-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.suggestions-bar {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+}
+
+.suggestions-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.suggestion-placeholder {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+.suggestion-chip {
+    background: var(--key-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.suggestion-chip:hover {
+    background: var(--suggestion-hover);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+[data-theme="neon"] .suggestion-chip:hover {
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ===================================
+   Keyboard Layout
+   =================================== */
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.key {
+    background: var(--key-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.key:hover {
+    background: var(--key-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.key:active {
+    background: var(--key-active);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="neon"] .key {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-glow);
+}
+
+[data-theme="neon"] .key:hover {
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Key Press Ripple Effect */
+.key::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.key.ripple::after {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+}
+
+/* Special Keys */
+.key-special {
+    background: var(--key-special);
+    color: white;
+    border-color: var(--key-special);
+}
+
+.key-special:hover {
+    background: var(--key-special-hover);
+}
+
+[data-theme="gradient"] .key-special {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+[data-theme="neon"] .key-special {
+    background: var(--key-special);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.key-spacebar {
+    flex: 1;
+    min-width: 200px;
+}
+
+.key-enter {
+    min-width: 80px;
+}
+
+.key-small {
+    min-width: 40px;
+}
+
+/* Shift Key Active State */
+.key-special.active {
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* ===================================
+   Footer
+   =================================== */
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* ===================================
+   Animations
+   =================================== */
+
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 20px var(--accent-glow), 0 0 30px var(--accent-glow);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.suggestion-chip {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+@media (max-width: 768px) {
+    .app-wrapper {
+        padding: 0.5rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .theme-switcher {
+        justify-content: center;
+    }
+
+    .theme-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .keyboard-container {
+        padding: 1rem;
+    }
+
+    .key {
+        min-width: 35px;
+        height: 45px;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .key-spacebar {
+        min-width: 150px;
+    }
+
+    .key-enter {
+        min-width: 60px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .text-display {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .keyboard-row {
+        gap: 0.35rem;
+    }
+
+    .key {
+        min-width: 28px;
+        height: 40px;
+        font-size: 0.85rem;
+    }
+
+    .key-spacebar {
+        min-width: 120px;
+    }
+
+    .suggestions-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
