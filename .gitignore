@@ -1,6 +1,5 @@
 # Python
 __pycache__/
-ml-module/
 *.pyc
 *.pyo
 *.pyd
