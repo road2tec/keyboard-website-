@@ -1,16 +1,14 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { KeyboardResponse } from "../types/keyboard";
+import { getKeyboardSuggestions as getLTSuggestions } from "./languagetool";
 
 export async function getKeyboardSuggestions(text: string, retryCount = 0): Promise<KeyboardResponse> {
   const apiKey = process.env.GEMINI_API_KEY;
 
+  // Use LanguageTool directly if no API Key
   if (!apiKey || apiKey.includes("REPLACE_ME")) {
-    return {
-      original_text: text,
-      corrected_text: text,
-      suggestions: [],
-      language: "Error: GEMINI_API_KEY not configured on Vercel"
-    };
+    console.warn("Gemini API Key missing, falling back to LanguageTool.");
+    return getLTSuggestions(text);
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -25,15 +23,20 @@ You are a Smart Keyboard AI Engine.
 Your job is to assist users while typing in real time.
 
 Tasks:
-1. Analyze the COMPLETE input sentence provided by the user.
-2. If the grammar of the COMPLETE sentence is incorrect, return the FULL corrected sentence in "corrected_text".
-3. If the grammar is already correct, return the EXACT same sentence in "corrected_text".
-4. CRITICAL: Do NOT truncate or shorten the sentence. Maintain all words and original meaning.
-5. Predict exactly 3 context-aware next words that would follow the corrected sentence.
+1. Analyze the input text.
+2. If the sentence is INCOMPLETE, autocomplete it to form a logical, complete sentence in "corrected_text".
+3. If the sentence has GRAMMAR errors, fix them in "corrected_text".
+4. If the sentence is already COMPLETE and CORRECT, return it as is.
+5. Predict exactly 3 context-aware next words.
+
+Examples:
+- Input: "how are" -> Corrected: "How are you doing today?"
+- Input: "tumhi kay" -> Corrected: "तुम्ही काय करत आहात?"
+- Input: "I goes home" -> Corrected: "I go home."
 
 Language Rules:
 - Detect English, Hindi, or Marathi.
-- Preserve the detected language.
+- Return the response in the SAME language/script as the input.
 
 Performance Rules:
 - Fast response suitable for keyboard typing.
@@ -76,27 +79,8 @@ Return ONLY valid JSON in the following format:
     const message = error.message;
     console.error(`Gemini API Error (Attempt ${retryCount + 1}): [${status}] ${message}`);
 
-    // If it's a 429, we should definitely wait before retrying, or just fail gracefully
-    if (status === 429) {
-      console.log("Rate limited (429). Returning original text.");
-      return {
-        original_text: text,
-        corrected_text: text,
-        suggestions: [],
-        language: "Quota Exceeded"
-      };
-    }
-
-    if (retryCount < 1 && status !== 429) {
-      console.log("Retrying Gemini API call...");
-      return getKeyboardSuggestions(text, retryCount + 1);
-    }
-
-    return {
-      original_text: text,
-      corrected_text: text,
-      suggestions: [],
-      language: "Error: " + (status || "Unknown")
-    };
+    // Fallback to LanguageTool on failure (e.g. 429, 503, or Network Error)
+    console.log("Falling back to LanguageTool due to Gemini error...");
+    return getLTSuggestions(text);
   }
 }

@@ -162,6 +162,7 @@ export default function KeyboardDemoPage() {
             if (e.key === 'Backspace') {
                 handleKeyPress('Backspace');
             } else if (e.key === ' ') {
+                e.preventDefault(); // Prevent scrolling
                 handleKeyPress('Space');
             } else if (e.key === 'Enter') {
                 handleKeyPress('Enter');
